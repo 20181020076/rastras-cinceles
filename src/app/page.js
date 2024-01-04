@@ -9,7 +9,7 @@ export default function Home() {
   const [separacionCinceles, setSeparacionCinceles] = useState("");
   const [separacionDiscos, setSeparacionDiscos] = useState("");
   const [secciones, setSecciones] = useState(1);
-  const [penetracionDisco, setPenetracionDisco] = useState("");
+  const [penetracionDisco, setPenetracionDisco] = useState(0.33);
   const [profundidadPreparacion, setProfundidadPreparacion] = useState("");
   const [numeroCinceles, setNumeroCinceles] = useState("");
   const [profundidadCinceles, setProfundidadCinceles] = useState("");
@@ -126,14 +126,7 @@ export default function Home() {
               value={secciones}
               onChange={(e) => setSecciones(e.target.value)}
             />
-            <label htmlFor="penetracionDisco">Penetracion del disco</label>
-            <input
-              type="number"
-              id="penetracionDisco"
-              name="penetracionDisco"
-              value={penetracionDisco}
-              onChange={(e) => setPenetracionDisco(e.target.value)}
-            />
+            
             <label htmlFor="coefSuelo">
               Coeficiente, Rotura suelo (Kg/Cm2)
             </label>
@@ -143,7 +136,9 @@ export default function Home() {
               name="coefSuelo"
               value={coefSuelo}
               onChange={(e) => setCoefSuelo(e.target.value)}
-            />
+              />
+              <p>Penetracion del disco 1/3</p>
+              <p>0.33</p>
             <p>Profundidad de preparacion (cm)</p>
             <div>{diametroDiscos * 2.54 * penetracionDisco}</div>
 
