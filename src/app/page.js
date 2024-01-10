@@ -40,7 +40,7 @@ export default function Home() {
         (nuevaFuerza * ((velocidad * 1000) / 3600).toFixed(2)) / 76.04;
       setPotenciaBt(nuevaPotenciaBt);
 
-      const nuevaPotenciaVolante = nuevaPotenciaBt / 0.7;
+      const nuevaPotenciaVolante = nuevaPotenciaBt / 0.8;
       setPotenciaVolante(nuevaPotenciaVolante);
     } else if (mood == 1) {
       const nuevaFuerza = ((numeroCinceles * separacionCinceles) / secciones)*coefSuelo*profundidadCinceles;
@@ -229,7 +229,7 @@ export default function Home() {
         </button>
         <div className="flex flex-col">
           <div>
-            <span className="font-bold">Potencia Voltante:</span>
+            <span className="font-bold">Potencia al motor:</span>
             <>{potenciaVolante.toFixed(2)}</>{" "}
           </div>
           <div>
