@@ -174,8 +174,20 @@ const InputsComparativa = ({
 
       <div className="flex w-full items-center justify-center border border-black">
         <p className="w-[40%] ">Con implemento</p>
-        <input type="number" className="w-[30%]" />
-        <input type="number" className="w-[30%]" />
+        <input type="number" className="w-[30%]"  onChange={(value) => {
+            if (value.target.value == "" || value.target.value == null) {
+              
+            } else {
+              
+            }
+          }}/>
+        <input type="number" className="w-[30%]"  onChange={(value) => {
+            if (value.target.value == "" || value.target.value == null) {
+              
+            } else {
+              
+            }
+          }}/>
       </div>
       {/* input sin implemento */}
 
@@ -188,7 +200,13 @@ const InputsComparativa = ({
 
       <div className="flex w-full justify-center items-center">
         <p className="w-[40%]">Numero de horas o has /dia</p>
-        <input type="text" className="w-[60%] h-[24px]" />
+        <input type="text" className="w-[60%] h-[24px]"  onChange={(value) => {
+            if (value.target.value == "" || value.target.value == null) {
+              setPrecioCombustible(0);
+            } else {
+              setPrecioCombustible(value.target.value);
+            }
+          }}/>
       </div>
 
       {/* input numero horas/dia */}
@@ -201,7 +219,7 @@ const InputsComparativa = ({
 
       <div className="flex w-full justify-center items-center">
         <p className="w-[40%] ">Velocidad (Km/hr)</p>
-        <input type="number" className="w-[30%] h-[24px]" />
+        <input type="number" className="w-[30%] h-[24px]" onChange={()=>setVelocidad1()}/>
         <input type="number" className="w-[30%] h-[24px]" />
       </div>
       {/* Ancho de operacion implemento*/}

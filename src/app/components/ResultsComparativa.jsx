@@ -24,64 +24,64 @@ const ResultsComparativa = ({
       setTractor1((tiempo1/consumo1)*60/1000)
       setTractor2((tiempo2/consumo2)*60/1000)
       setDiferencia(tractor1-tractor2)
-      setPorcentaje(0)
+      setPorcentaje(1-(tractor2-tractor1))
       // consumo (Gal/hr)
     }else if(selectedValue==1){
       setTractor1((consumo1*60)/(1000*3.7854*tiempo1))
       setTractor2((consumo2*60)/(1000*3.7854*tiempo2))
       setDiferencia(tractor1-tractor2)
-      setPorcentaje(1)
+      setPorcentaje(1-(tractor2-tractor1))
       // consumo (Gal/ha)
     }else if(selectedValue==2){
-      setTractor1((consumo1*60)/(1000*3.7854*tiempo1))
-      setTractor2((consumo2*60)/(1000*3.7854*tiempo2))
+      setTractor1(((consumo1*60)/(1000*3.7854*tiempo1))/(tiempo1/consumo1)*60/1000)
+      setTractor2(((consumo2*60)/(1000*3.7854*tiempo2))/(tiempo2/consumo2)*60/1000)
       setDiferencia(tractor1-tractor2)
-      setPorcentaje(1)
+      setPorcentaje(1-(tractor2-tractor1))
       // costo combustible ($/hr)
     }else if(selectedValue==3){
-      setTractor1((consumo1*60)/(1000*3.7854*tiempo1))
-      setTractor2((consumo2*60)/(1000*3.7854*tiempo2))
+      setTractor1(precioCombustible*tiempo1)
+      setTractor2(precioCombustible*tiempo2)
       setDiferencia(tractor1-tractor2)
-      setPorcentaje(1)
+      setPorcentaje(1-(tractor2-tractor1))
       // costo combustible ($/ha)
       
     }else if(selectedValue==4){
-      setTractor1((consumo1*60)/(1000*3.7854*tiempo1))
-      setTractor2((consumo2*60)/(1000*3.7854*tiempo2))
+      setTractor1((precioCombustible*tiempo1)/((tiempo1/consumo1)*60/1000))
+      setTractor2((precioCombustible*tiempo2)/((tiempo2/consumo2)*60/1000))
       setDiferencia(tractor1-tractor2)
-      setPorcentaje(1)
+      setPorcentaje(1-(tractor2-tractor1))
     }
     // relacion peso/potencia (kg/hp)
     else if(selectedValue==5){
-      setTractor1((consumo1*60)/(1000*3.7854*tiempo1))
-      setTractor2((consumo2*60)/(1000*3.7854*tiempo2))
+      setTractor1(peso1/potencia1)
+      setTractor2(peso2/potencia2)
       setDiferencia(tractor1-tractor2)
-      setPorcentaje(1)
+      setPorcentaje(1-(tractor2-tractor1))
       // eficiencia
     }else if(selectedValue==6){
-      setTractor1((consumo1*60)/(1000*3.7854*tiempo1))
+      setTractor1(1-((0)/(1)))
       setTractor2((consumo2*60)/(1000*3.7854*tiempo2))
       setDiferencia(tractor1-tractor2)
-      setPorcentaje(1)
+      setPorcentaje(1-(tractor2-tractor1))
     }
     // patinamiento
     else if(selectedValue==7){
       setTractor1((consumo1*60)/(1000*3.7854*tiempo1))
       setTractor2((consumo2*60)/(1000*3.7854*tiempo2))
       setDiferencia(tractor1-tractor2)
-      setPorcentaje(1)
+      setPorcentaje(1-(tractor2-tractor1))
       // Costo ($) vs No horas
     }else if(selectedValue==8){
       setTractor1((consumo1*60)/(1000*3.7854*tiempo1))
       setTractor2((consumo2*60)/(1000*3.7854*tiempo2))
       setDiferencia(tractor1-tractor2)
-      setPorcentaje(1)
+      setPorcentaje(1-(tractor2-tractor1))
       // Costo ($) vs No hectarea
     }else if(selectedValue==8){
       setTractor1((consumo1*60)/(1000*3.7854*tiempo1))
       setTractor2((consumo2*60)/(1000*3.7854*tiempo2))
       setDiferencia(tractor1-tractor2)
-      setPorcentaje(1)
+      setPorcentaje(1-(tractor2-tractor1))
     }
     
     
