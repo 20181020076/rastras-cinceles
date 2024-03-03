@@ -122,13 +122,10 @@ const InputsComparativa = ({
         <input
           type="number"
           className="w-[30%]"
-          onChange={(value) => {
-            if (value.target.value == "" || value.target.value == null) {
-              setTiempo2(0);
-            } else {
-              setTiempo2(value.target.value);
-            }
-          }}
+          onChange={async(value) =>{
+            const newValue = value.target.value
+            await setTiempo2(newValue);
+      }}
         />
       </div>
       {/* input Consumo de combustible */}
@@ -211,9 +208,9 @@ const InputsComparativa = ({
           }}/>
         <input type="number" className="w-[30%]" onChange={(value) => {
             if (value.target.value == "" || value.target.value == null) {
-              setConImplemento2(0)
+              setSinImplemento2(0)
             } else {
-              setConImplemento2(value.target.value)
+              setSinImplemento2(value.target.value)
               
             }
           }}/>
@@ -233,24 +230,24 @@ const InputsComparativa = ({
 
       {/* input numero datos teoricos */}
 
-      <div className="flex w-full ">
+      {/* <div className="flex w-full ">
         <h2 className="font-bold">Datos Teoricos</h2>
-      </div>
+      </div> */}
 
       {/* input velocidad */}
 
-      <div className="flex w-full justify-center items-center">
+      {/* <div className="flex w-full justify-center items-center">
         <p className="w-[40%] ">Velocidad (Km/hr)</p>
         <input type="number" className="w-[30%] h-[24px]" onChange={()=>setVelocidad1()}/>
         <input type="number" className="w-[30%] h-[24px]" />
-      </div>
+      </div> */}
       {/* Ancho de operacion implemento*/}
 
-      <div className="flex w-full justify-center items-center">
+      {/* <div className="flex w-full justify-center items-center">
         <p className="w-[40%] ">Ancho de operacion implemento (m)</p>
         <input type="number" className="w-[30%] h-[24px]" />
         <input type="number" className="w-[30%] h-[24px]" />
-      </div> 
+      </div>  */}
     </div>
   );
 };

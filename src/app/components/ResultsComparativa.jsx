@@ -22,7 +22,6 @@ const ResultsComparativa = ({
   const [selectedValue, setSelectedValue] = useState(0);
   const [tractor1, setTractor1] = useState(0)
   const [tractor2, setTractor2] = useState(0)
-  const [Porcentaje, setPorcentaje] = useState(0)
 
   const rendimiento = (select) =>{
      if(select == 1){
@@ -45,18 +44,25 @@ const ResultsComparativa = ({
   const diferencia = () =>{
     return (tractor1 - tractor2)
   }
+  const porcentaje = () =>{
+    return ((1-(tractor2/tractor1))*100)
+
+  }
 
   const handleResults = async() => {
     // rendimiento
     if(selectedValue==0){
-    
+      
       await setTractor1(rendimiento(1))
       await setTractor2(rendimiento(2))
       
+      
       // consumo (Gal/hr)
     }else if(selectedValue==1){
-      setTractor1(consumoPesosHora(1))
-      setTractor2(consumoPesosHora(2))
+      
+      await setTractor1(consumoPesosHora(1))
+      await setTractor2(consumoPesosHora(2))
+      
       
       // consumo (Gal/ha)
     }else if(selectedValue==2){
@@ -64,22 +70,28 @@ const ResultsComparativa = ({
       const rend2 = rendimiento(2)
       const consume1 =  consumoPesosHora(1)
       const consume2 =  consumoPesosHora(2)
-      setTractor1(consume1/rend1)
-      setTractor2(consume2/rend2)
+      
+      await setTractor1(consume1/rend1)
+      await setTractor2(consume2/rend2)
+      
+      
+
       
       // costo combustible ($/hr)
     }else if(selectedValue==3){
-      const consume1 =  (consumo1*60)/(1000*3.7854*tiempo1)
-      const consume2 =  (consumo2*60)/(1000*3.7854*tiempo2)
-      setTractor1(precioCombustible*consume1)
-      setTractor2(precioCombustible*consume2)
+      const consume1 =  (consumo1*60)/(1000*3.7854*tiempo1)*precioCombustible
+      const consume2 =  (consumo2*60)/(1000*3.7854*tiempo2)*precioCombustible
+      await setTractor1(consume1)
+      await setTractor2(consume2)
       
       // costo combustible ($/ha)
       
     }else if(selectedValue==4){
       const costo1 =  (consumo1*60)/(1000*3.7854*tiempo1)*precioCombustible/ rendimiento(1)
-      setTractor1(costo1)
-      setTractor2((precioCombustible*tiempo2)/((tiempo2/consumo2)*60/1000))
+      const costo2 =  (consumo2*60)/(1000*3.7854*tiempo2)*precioCombustible/ rendimiento(2)
+
+      await setTractor1(costo1)
+      await setTractor2(costo2)
       
     }
     // relacion peso/potencia (kg/hp)
@@ -87,44 +99,152 @@ const ResultsComparativa = ({
       const relacionPesoPotencia1 = peso1/potencia1
       const relacionPesoPotencia2 = peso2/potencia2
 
-      setTractor1(relacionPesoPotencia1)
-      setTractor2(relacionPesoPotencia2)
+      await setTractor1(relacionPesoPotencia1)
+      await setTractor2(relacionPesoPotencia2)
       
       // eficiencia
     }else if(selectedValue==6){
-      const efi1 = 1-((0.72)-(rendimiento(1)))/0.72
-      const efi2 = 1-((0.72)-(rendimiento(2)))/0.72
 
-      setTractor1(efi1*100)
-      setTractor2(efi2*100)
+      const efi1 = (1-((0.72)-(await rendimiento(1)))/0.72)*100
+      const efi2 = (1-((0.63)-(await rendimiento(2)))/0.63)*100
+
+      await setTractor1(efi1)
+      await setTractor2(efi2)
     
     }
     // patinamiento
     else if(selectedValue==7){
-      const pat1 = sinImplemento1/conImplemento1
-      const pat2 = sinImplemento2/conImplemento2
-      setTractor1((1-pat1)*100)
-      setTractor2((1-pat2)*100)
+      const pat1 = (1-sinImplemento1/conImplemento1)*100
+      const pat2 = (1-sinImplemento2/conImplemento2)*100
+      await setTractor1(pat1)
+      await setTractor2(pat2)
       
       // Costo ($) vs No horas
     }else if(selectedValue==8){
       const precioHoras1 = consumoPesosHora(1)*horasDia*precioCombustible
       const precioHoras2 = consumoPesosHora(2)*horasDia*precioCombustible
-      setTractor1(precioHoras1)
-      setTractor2(precioHoras2)
+      await setTractor1(precioHoras1)
+      await setTractor2(precioHoras2)
       
       // Costo ($) vs No hectarea
     }else if(selectedValue==9){
       const costo1 =  (consumo1*60)/(1000*3.7854*tiempo1)*precioCombustible/ rendimiento(1)
-      const costo2 =  (consumo2*60)/(1000*3.7854*tiempo1)*precioCombustible/ rendimiento(2)
-      setTractor1(costo1*horasDia)
-      setTractor2(costo2*horasDia)
+      const costo2 =  (consumo2*60)/(1000*3.7854*tiempo2)*precioCombustible/ rendimiento(2)
+      await setTractor1(costo1*horasDia)
+      await setTractor2(costo2*horasDia)
       
     }
     
     
     
   };
+  const handleColor = () => {
+      // rendimiento (ha/hr)
+    if(selectedValue=="0"){
+      const porcentage = porcentaje()
+      if(porcentage>0){
+      return "bg-green-500"
+
+      }else if(porcentage<0){
+      return "bg-red-500"
+      }
+      return ""
+
+      // consumo de combustible(gal/hr)
+    }else if(selectedValue=="1"){
+      const porcentage = porcentaje()
+      if(porcentage>0){
+      return "bg-red-500"
+
+      }else if(porcentage<0){
+      return "bg-green-500"
+      }
+      return ""
+      // consumo de combustible(gal/ha)
+
+    }else if(selectedValue=="2"){
+      const porcentage = porcentaje()
+      if(porcentage>0){
+      return "bg-red-500"
+
+      }else if(porcentage<0){
+      return "bg-green-500"
+      }
+      return ""
+
+      // costo combustible($/hr)
+    }else if(selectedValue=="3"){
+      const porcentage = porcentaje()
+      if(porcentage>0){
+      return "bg-red-500"
+
+      }else if(porcentage<0){
+      return "bg-green-500"
+      }
+      return ""
+      // costo combustible($/ha)
+    }else if(selectedValue=="4"){
+      const porcentage = porcentaje()
+      if(porcentage>0){
+      return "bg-red-500"
+
+      }else if(porcentage<0){
+      return "bg-green-500"
+      }
+      return ""
+      // relacion peso/potencia(kg/hp)
+    }else if(selectedValue=="5"){
+      const porcentage = porcentaje()
+      if(porcentage>0){
+      return "bg-red-500"
+
+      }else if(porcentage<0){
+      return "bg-green-500"
+      }
+      return ""
+      // eficiencia
+    }else if(selectedValue=="6"){
+      const porcentage = porcentaje()
+      if(porcentage>0){
+      return "bg-green-500"
+
+      }else if(porcentage<0){
+      return "bg-red-500"
+      }
+      return ""
+      // patinamiento
+    }else if(selectedValue=="7"){
+      const porcentage = porcentaje()
+      if(porcentage>0){
+      return "bg-red-500"
+
+      }else if(porcentage<0){
+      return "bg-green-500"
+      }
+      return ""
+    }
+    // costo ($) cs No Horas
+    else if(selectedValue=="8"){
+      const porcentage = porcentaje()
+      if(porcentage>0){
+      return "bg-red-500"
+
+      }else if(porcentage<0){
+      return "bg-green-500"
+      }
+      return ""
+    // costo ($) cs No Hectareas
+    }else if(selectedValue=="9"){
+      const porcentage = porcentaje()
+      if(porcentage>0){
+      return "bg-red-500"
+
+      }else if(porcentage<0){
+      return "bg-green-500"
+      }
+      return ""
+    }
+  }
   const handleChange = (e) => {
     setSelectedValue(e.target.value);
     handleResults()
@@ -143,6 +263,12 @@ const ResultsComparativa = ({
     consumo1,
     consumo2,
     precioCombustible,
+    horasDia,
+    conImplemento1,
+    conImplemento2,
+    sinImplemento1,
+    sinImplemento2,
+
     selectedValue])
   return (
     <div>
@@ -163,11 +289,12 @@ const ResultsComparativa = ({
         <div className=" justify-between">
           <div className="flex justify-between">
             <h3>Tractor 1</h3>
-            <>{selectedValue==3 || selectedValue==4?"$"+tractor1.toFixed(0):tractor1.toFixed(2)}</>
+            <>{selectedValue==3 || selectedValue==4 || selectedValue==8 || selectedValue==9?"$"+tractor1.toFixed(0):tractor1.toFixed(2)}</>
           </div>
           <div className="flex justify-between">
             <h3>Tractor 2</h3>
-            <>{tractor2.toFixed(2)}</>
+            <>{selectedValue==3 || selectedValue==4?"$"+tractor2.toFixed(0):tractor2.toFixed(2)}</>
+
           </div>
           <div className="flex justify-between">
             <h3>Diferencia</h3>
@@ -175,7 +302,7 @@ const ResultsComparativa = ({
           </div>
           <div className="flex justify-between">
             <h3>Porcentaje</h3>
-            <>{Porcentaje.toFixed(2)}</>
+            <div className={`px-1 ${handleColor()}`}>{porcentaje().toFixed(0)}%</div>
           </div>
         </div>
       </div>
