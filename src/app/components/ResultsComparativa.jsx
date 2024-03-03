@@ -45,6 +45,9 @@ const ResultsComparativa = ({
     return (tractor1 - tractor2)
   }
   const porcentaje = () =>{
+    if (selectedValue==7){
+      return tractor2-tractor1
+    }
     return ((1-(tractor2/tractor1))*100)
 
   }
@@ -104,9 +107,11 @@ const ResultsComparativa = ({
       
       // eficiencia
     }else if(selectedValue==6){
+      const rend1 =  rendimiento(1)
+      const rend2 =  rendimiento(2)
 
-      const efi1 = (1-((0.72)-(await rendimiento(1)))/0.72)*100
-      const efi2 = (1-((0.63)-(await rendimiento(2)))/0.63)*100
+      const efi1 = (1-((0.72)-(rend1))/0.72)*100
+      const efi2 = (1-((0.63)-(rend2))/0.63)*100
 
       await setTractor1(efi1)
       await setTractor2(efi2)
@@ -114,8 +119,8 @@ const ResultsComparativa = ({
     }
     // patinamiento
     else if(selectedValue==7){
-      const pat1 = (1-sinImplemento1/conImplemento1)*100
-      const pat2 = (1-sinImplemento2/conImplemento2)*100
+      const pat1 = (1-(sinImplemento1/conImplemento1))*100
+      const pat2 = (1-(sinImplemento2/conImplemento2))*100
       await setTractor1(pat1)
       await setTractor2(pat2)
       
