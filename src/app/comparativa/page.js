@@ -19,6 +19,10 @@ export default function Comparativa() {
   const [conImplemento2, setConImplemento2] = useState(0);
   const [sinImplemento1, setSinImplemento1] = useState(0);
   const [sinImplemento2, setSinImplemento2] = useState(0);
+  const [velocidad1, setVelocidad1] = useState(0)
+  const [velocidad2, setVelocidad2] = useState(0)
+  const [anchoOperacion1, setAnchoOperacion1] = useState(0)
+  const [anchoOperacion2, setAnchoOperacion2] = useState(0)
 
   useEffect(() => {}, [
     potencia1,
@@ -37,6 +41,10 @@ export default function Comparativa() {
     conImplemento2,
     sinImplemento1,
     sinImplemento2,
+    velocidad1,
+    velocidad2,
+    anchoOperacion1,
+    anchoOperacion2
   ]);
   return (
     <div className="w-screen  min-h-screen flex flex-col justify-center items-center bg-primary py-10">
@@ -60,6 +68,11 @@ export default function Comparativa() {
           setConImplemento2={setConImplemento2}
           setSinImplemento1={setSinImplemento1}
           setSinImplemento2={setSinImplemento2}
+          setVelocidad1={setVelocidad1}
+          setVelocidad2={setVelocidad2}
+          setAnchoOperacion1={setAnchoOperacion1}
+          setAnchoOperacion2={setAnchoOperacion2}
+
         />
         <ResultsComparativa
           potencia1={potencia1}
@@ -78,6 +91,10 @@ export default function Comparativa() {
           conImplemento2={conImplemento2}
           sinImplemento1={sinImplemento1}
           sinImplemento2={sinImplemento2}
+          velocidad1={velocidad1}
+          velocidad2={velocidad2}
+          anchoOperacion1={anchoOperacion1}
+          anchoOperacion2={anchoOperacion2}
         />
       </div>
     </div>

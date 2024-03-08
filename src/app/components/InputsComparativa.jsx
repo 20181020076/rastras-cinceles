@@ -1,8 +1,6 @@
 import React, { useEffect } from "react";
 
 const InputsComparativa = ({
-  tiempo1,
-  area1,
   setPotencia1,
   setPotencia2,
   setPeso1,
@@ -19,10 +17,15 @@ const InputsComparativa = ({
   setConImplemento2,
   setSinImplemento1,
   setSinImplemento2,
+  setVelocidad1,
+  setVelocidad2,
+  setAnchoOperacion1,
+  setAnchoOperacion2
+
 
 }) => {
   useEffect(()=>{
-  },[tiempo1,area1])
+  },[])
   return (
     <div className="w-full ">
       <div className="flex justify-center items-center">
@@ -230,24 +233,49 @@ const InputsComparativa = ({
 
       {/* input numero datos teoricos */}
 
-      {/* <div className="flex w-full ">
+      <div className="flex w-full ">
         <h2 className="font-bold">Datos Teoricos</h2>
-      </div> */}
+      </div>
 
       {/* input velocidad */}
 
-      {/* <div className="flex w-full justify-center items-center">
+      <div className="flex w-full justify-center items-center">
         <p className="w-[40%] ">Velocidad (Km/hr)</p>
-        <input type="number" className="w-[30%] h-[24px]" onChange={()=>setVelocidad1()}/>
-        <input type="number" className="w-[30%] h-[24px]" />
-      </div> */}
+        <input type="number" className="w-[30%] h-[24px]" onChange={(value) => {
+            if (value.target.value == "" || value.target.value == null) {
+              setVelocidad1(0);
+            } else {
+              
+              setVelocidad1(value.target.value);
+            }
+          }}/>
+         <input type="number" className="w-[30%] h-[24px]" onChange={(value) => {
+            if (value.target.value == "" || value.target.value == null) {
+              setVelocidad2(0);
+            } else {
+              setVelocidad2(value.target.value);
+            }
+          }}/>
+      </div>
       {/* Ancho de operacion implemento*/}
 
-      {/* <div className="flex w-full justify-center items-center">
+      <div className="flex w-full justify-center items-center">
         <p className="w-[40%] ">Ancho de operacion implemento (m)</p>
-        <input type="number" className="w-[30%] h-[24px]" />
-        <input type="number" className="w-[30%] h-[24px]" />
-      </div>  */}
+        <input type="number" className="w-[30%] h-[24px]" onChange={(value) => {
+            if (value.target.value == "" || value.target.value == null) {
+              setAnchoOperacion1(0);
+            } else {
+              setAnchoOperacion1(value.target.value);
+            }
+          }}/>
+        <input type="number" className="w-[30%] h-[24px]" onChange={(value) => {
+            if (value.target.value == "" || value.target.value == null) {
+              setAnchoOperacion2(0);
+            } else {
+              setAnchoOperacion2(value.target.value);
+            }
+          }}/>
+      </div> 
     </div>
   );
 };

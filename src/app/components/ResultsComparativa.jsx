@@ -17,6 +17,10 @@ const ResultsComparativa = ({
   conImplemento2,
   sinImplemento1,
   sinImplemento2,
+  velocidad1,
+  velocidad2,
+  anchoOperacion1,
+  anchoOperacion2
 
 }) => {
   const [selectedValue, setSelectedValue] = useState(0);
@@ -107,11 +111,14 @@ const ResultsComparativa = ({
       
       // eficiencia
     }else if(selectedValue==6){
-      const rend1 =  rendimiento(1)
-      const rend2 =  rendimiento(2)
+      const rendTeorico1 =  velocidad1*anchoOperacion1*1000/10000
+      const rendTeorico2 =  velocidad2*anchoOperacion2*1000/10000
 
-      const efi1 = (1-((0.72)-(rend1))/0.72)*100
-      const efi2 = (1-((0.63)-(rend2))/0.63)*100
+      const rend1 = rendimiento(1)
+      const rend2 = rendimiento(2)
+
+      const efi1 = (1-((rendTeorico1-rend1)/rendTeorico1))*100
+      const efi2 = (1-((rendTeorico2-rend2)/rendTeorico2))*100
 
       await setTractor1(efi1)
       await setTractor2(efi2)
@@ -273,7 +280,10 @@ const ResultsComparativa = ({
     conImplemento2,
     sinImplemento1,
     sinImplemento2,
-
+    velocidad1,
+    velocidad2,
+    anchoOperacion1,
+    anchoOperacion2,
     selectedValue])
   return (
     <div>
@@ -294,16 +304,17 @@ const ResultsComparativa = ({
         <div className=" justify-between">
           <div className="flex justify-between">
             <h3>Tractor 1</h3>
-            <>{selectedValue==3 || selectedValue==4 || selectedValue==8 || selectedValue==9?"$"+tractor1.toFixed(0):tractor1.toFixed(2)}</>
+            <>{selectedValue==3 || selectedValue==4 || selectedValue==8 || selectedValue==9?"$"+tractor1.toFixed(0).toString().replace(/\B(?=(\d{3})+(?!\d))/g, "."):(selectedValue==6 || selectedValue==7?tractor1.toFixed(2).replace(/\./g, ',')+"%":tractor1.toFixed(2).replace(/\./g, ','))}</>
           </div>
           <div className="flex justify-between">
             <h3>Tractor 2</h3>
-            <>{selectedValue==3 || selectedValue==4?"$"+tractor2.toFixed(0):tractor2.toFixed(2)}</>
+            <>{selectedValue==3 || selectedValue==4 || selectedValue==8 || selectedValue==9?"$"+tractor2.toFixed(0).toString().replace(/\B(?=(\d{3})+(?!\d))/g, "."):(selectedValue==6 || selectedValue==7?tractor2.toFixed(2).replace(/\./g, ',')+"%":tractor2.toFixed(2).replace(/\./g, ','))}</>
 
           </div>
           <div className="flex justify-between">
             <h3>Diferencia</h3>
-            <>{diferencia().toFixed(2)}</>
+            <>{selectedValue==3 || selectedValue==4 || selectedValue==8 || selectedValue==9?"$"+diferencia().toFixed(0).toString().replace(/\B(?=(\d{3})+(?!\d))/g, "."):(selectedValue==6 || selectedValue==7?diferencia().toFixed(2).replace(/\./g, ',')+"%":diferencia().toFixed(2).replace(/\./g, ','))}</>
+
           </div>
           <div className="flex justify-between">
             <h3>Porcentaje</h3>
