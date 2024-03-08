@@ -222,7 +222,7 @@ const InputsComparativa = ({
 
       <div className="flex w-full justify-center items-center">
         <p className="w-[40%]">Numero de horas o has /dia</p>
-        <input type="text" className="w-[60%] h-[24px]"  onChange={(value) => {
+        <input type="number" className="w-[60%] h-[24px]"  onChange={(value) => {
             if (value.target.value == "" || value.target.value == null) {
               setHorasDia(0);
             } else {
