@@ -228,10 +228,10 @@ const ResultsComparativa = ({
     }else if(selectedValue=="7"){
       const porcentage = porcentaje()
       if(porcentage>0){
-      return "bg-red-500"
+      return "bg-green-500"
 
       }else if(porcentage<0){
-      return "bg-green-500"
+      return "bg-red-500"
       }
       return ""
     }
