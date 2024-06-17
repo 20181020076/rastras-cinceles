@@ -12,7 +12,7 @@ export default function Home() {
             Calculo de potencias
           </Link>
           <Link className="border border-red-500" href={"/comparativa"}>
-            Comparativa rendimiento entre tractores
+            Prueba comparativa rendimiento entre tractores
           </Link>
           <div className="border border-red-500">proximamente</div>
         </div>
